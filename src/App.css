@@ -1,0 +1,30 @@
+.App {
+  text-align: center;
+}
+
+.map-wrapper {
+  position: relative;
+  display: inline-block;
+  z-index: -1;
+}
+
+.map {
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+  max-width: 100vw;
+  max-height: 100vh;
+}
+
+.base {
+  border: 5px solid black;
+}
+
+.overlay {
+  position: absolute;
+  transform: scale(3.55);
+  mix-blend-mode: multiply;
+  opacity: 0.8;
+  transform-origin: 50% 42.7%;
+  clip-path: circle(14.2% at 50.1% 45%);
+}
