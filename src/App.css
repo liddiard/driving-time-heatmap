@@ -124,15 +124,22 @@ ul.examples p {
   margin: 0 0.4em;
 }
 
-.time-type input {
+.time-type input[type=radio] {
   vertical-align: text-top;
   margin-right: 0.5em;
 }
 
-input.datetime {
+input.flatpickr-input {
   display: block;
   margin: 0.5em auto;
+  padding: 0.2em 0.4em;
   font-size: 1.2em;
+  border: 1px solid gray;
+}
+
+input.flatpickr-input[disabled] {
+  opacity: 0.25;
+  cursor: default;
 }
 
 input:invalid {

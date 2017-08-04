@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import request from 'superagent';
 import Autocomplete from 'react-google-autocomplete';
+import Flatpickr from 'react-flatpickr'
 import Geodesy from 'geodesy';
 
 import './App.css';
@@ -68,9 +69,8 @@ class App extends Component {
     this.setState({ timeType: event.target.value });
   }
 
-  handleDatetimeChange(event) {
-    console.log(event.target.value);
-    this.setState({ datetime: event.target.value });
+  handleDatetimeChange(value) {
+    this.setState({ datetime: value });
   }
 
   displayOverlay() {
@@ -173,7 +173,7 @@ class App extends Component {
       );
       legend = (
         <legend>
-          <h3>Minutes from start point</h3>
+          <h3>Minutes from starting point</h3>
           <ul>
             { Object.keys(this.props.durations)
               .map((d, i) => {
@@ -267,17 +267,19 @@ class App extends Component {
                       checked={this.state.timeType === 'arrival_time'} />
                 Arrive by:
               </label>
-              <input className="datetime" type="datetime-local"
-                    value={this.state.datetime}
-                    onChange={this.handleDatetimeChange} 
-                    disabled={this.state.timeType === 'now'}
-                    min={(new Date()).toISOString().substr(0, 16)} />
+              <Flatpickr data-enable-time
+                         disabled={this.state.timeType === 'now'}
+                         placeholder="Select date and time"
+                         onChange={this.handleDatetimeChange}
+                         options={{
+                           disable: [{ from: "1900-01-01", to: (new Date()).toISOString().substr(0, 10) }],
+                         }} />
               {/* https://stackoverflow.com/a/26749559 ^ */}
               { this.state.timeType !== 'now' ? 
-                <span className="tooltip">
-                  Enter a date and time in the future; e.g. next Monday during rush hour.<br/>
+                <div className="tooltip">
+                  Select a date and time in the future; e.g. next Monday during rush hour.<br/>
                   Times are in your computer’s current time zone.
-                </span>
+                </div>
                 : ''
               }
             </div>
