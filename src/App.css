@@ -1,5 +1,59 @@
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 .App {
   text-align: center;
+}
+
+header {
+  margin: 0 auto;
+  padding: 1em;
+  max-width: 960px;
+}
+
+.tooltip {
+  font-size: 0.9em;
+}
+
+.time-type {
+  margin: 1em;
+  font-size: 1.2em;
+}
+
+.time-type label {
+  margin: 0 0.25em;
+}
+
+.time-type input {
+  vertical-align: middle;
+}
+
+input.datetime {
+  display: block;
+  margin: 1em auto;
+  font-size: 1.2em;
+}
+
+input:invalid {
+  border-color: red;
+}
+
+button[type=submit] {
+  font-size: 2em;
 }
 
 .map-wrapper {
@@ -22,9 +76,14 @@
 
 .overlay {
   position: absolute;
-  transform: scale(3.55);
+  transform: scale(3.5);
   mix-blend-mode: multiply;
   opacity: 0.8;
-  transform-origin: 50% 42.7%;
+  transform-origin: 50% 43%;
   clip-path: circle(14.2% at 50.1% 45%);
+}
+
+.loading {
+  display: inline-block;
+  animation: rotate 2s linear infinite;
 }
