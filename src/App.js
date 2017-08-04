@@ -185,7 +185,7 @@ class App extends Component {
                   range = `${d-5}+`;
                 else
                   range = `${d-5}–${d}`;
-                return <li> 
+                return <li key={d}>
                   <img src={`${this.props.iconUrlPrefix}${color}.png`} alt={color} /> {range}
                 </li>
               }) 
@@ -205,9 +205,35 @@ class App extends Component {
     }
     return (
       <div className="App">
+        <ul className="examples">
+          <li>
+            <img src="/examples/la_early_morning_weekend.png" />
+            <p>From Downtown LA on an early morning weekend</p>
+          </li>
+          <li>
+            <img src="/examples/la_rush_hour.png" />
+            <p>From Downtown LA during rush hour</p>
+          </li>
+          <li>
+            <img src="/examples/bay_area_late_morning_weekday.png" />
+            <p>From a hotel next to San Jose Airport on a late morning weekday</p>
+          </li>
+          <li>
+            <img src="/examples/houston_suburb_fri_morning.png" />
+            <p>From a Houston suburb on Friday morning</p>
+          </li>
+          <li>
+            <img src="/examples/munich_stadium_late_evening.png" />
+            <p>From the Olympic stadium in Munich on a late evening weekday</p>
+          </li>
+          <li>
+            <img src="/examples/melborne_suburbs_saturday_morning.png" />
+            <p>From the suburbs of Melbourne on a Saturday morning</p>
+          </li>
+        </ul>
         <header>
           <h1>Harrison’s Fabulous Driving Time Map™ 🚗 ⏱ 🗺</h1>
-          <h2>See how much time it will take you to drive from a starting point – like your apartment or a prospective home – to surrounding areas in various traffic conditions.</h2>
+          <h2>See how long it will take you to drive from a starting point – like your apartment or a prospective home – to surrounding areas in various traffic conditions.</h2>
           <form onSubmit={this.handleSubmit}>
             <h3>1. Enter a start address</h3>
             { this.state.apiLoaded ? 
@@ -264,24 +290,25 @@ class App extends Component {
                 Generating the driving time map uses a Google Maps service that only allows a limited number of daily uses per person. Because of this, you need to get and use your own (free!) key. The key will allow you to generate about 20 driving time maps per day.
               </p>
               <ol>
-                <li>Go to <a href="https://developers.google.com/maps/documentation/distance-matrix/get-api-key#step-1-get-an-api-key-from-the-google-api-console" target="_blank">this page</a> and press the “Get a key” button.</li>
-                <li>From the “Select or create project” menu, select “Create a new project”.</li>
+                <li>Go to <a href="https://developers.google.com/maps/documentation/distance-matrix/get-api-key#step-1-get-an-api-key-from-the-google-api-console" target="_blank">this page</a> and press “Get a key”.</li>
+                <li>From the “Select or create project” menu, choose “Create a new project”.</li>
                 <li>Name the project “Travel time map”.</li>
                 <li>Press “Create and enable API”.</li>
                 <li>Under “Your API key”, copy the string of letters and numbers and paste it below:</li>
               </ol>
               <input type="text" value={this.state.apiKey} 
                      onChange={this.handleApiKeyChange} 
-                     required placeholder="Paste your key here" />
+                     required placeholder="Paste your key here"
+                     autoCorrect="off" autoCapitalize="off" spellCheck="false" />
             </div>
             <button type="submit"
                     disabled={!this.state.apiKey || !this.state.origin.lat || this.state.loading}>
               {submitText}
             </button>
             { this.state.loading ? 
-              <span className="loading-info">
+              <p className="loading-info">
                 ⏳ Hang tight! This usually takes 10-15 seconds.
-              </span> : ''
+              </p> : ''
             }
           </form>
         </header>

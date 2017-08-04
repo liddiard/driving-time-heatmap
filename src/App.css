@@ -47,7 +47,7 @@ header h2 {
 legend {
   margin: 1em auto;
   border: 1px solid #ccc;
-  padding: 0.25em 0.5em;
+  padding: 0.25em 0.75em;
 }
 
 legend h3 {
@@ -68,6 +68,41 @@ legend li {
 legend li img {
   vertical-align: middle;
   height: 2em;
+}
+
+ul.examples {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1.2;
+  color: gray;
+  font-size: 0.8em;
+  white-space: nowrap;
+  text-align: center;
+  margin-left: -110px;
+  overflow-x: auto;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #ddd;
+}
+
+ul.examples li {
+  display: inline-block;
+  width: 200px;
+  white-space: normal;
+  vertical-align: top;
+}
+
+ul.examples img {
+  display: block;
+  margin: 0 auto;
+  width: 322.5px;
+}
+
+ul.examples p {
+  margin: 0.5em 0;
+  text-align: right;
+  width: 75%;
+  float: right;
 }
 
 .tooltip {
@@ -97,7 +132,7 @@ button[type=submit] {
 }
 
 .api-key {
-  margin-bottom: 1em;
+  margin-bottom: 1.5em;
 }
 
 .api-key h3 {
@@ -127,8 +162,9 @@ button[type=submit] {
 }
 
 .api-key input[type=text] {
-  font-size: 1.5em;
-  min-width: 480px;
+  font-size: 1.2em;
+  width: 100%;
+  max-width: 420px;
   font-family: monospace;
   padding: 0.25em 0.5em;
 }
