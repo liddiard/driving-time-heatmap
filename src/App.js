@@ -106,9 +106,11 @@ class App extends Component {
       [this.state.timeType]: this.state.datetime ? Math.floor((new Date(this.state.datetime)).getTime() / 1000) : undefined
     })
     .then(res => {
-      if (!res.body.rows.length || !res.body.rows[0].elements) {
+      if (res.body.status === 'OVER_QUERY_LIMIT') {
+        return alert('Someone’s been generating a lot of maps!\n\nUnfortunately, you’ve exceeded your daily request limit for the Google Maps service that powers the driving time map generation.\n\nPlease try again in around 24 hours. :(');
+      }
+      else if (!res.body.rows.length || !res.body.rows[0].elements) {
         console.error(res.body);
-        
         throw new Error('Malformed API response.');
       }
       const durations = res.body.rows[0].elements;
