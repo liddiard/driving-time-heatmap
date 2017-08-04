@@ -332,7 +332,7 @@ class App extends Component {
 App.defaultProps = {
   apiKey: 'AIzaSyC4GIdBEWo_T_5-54ZqYWKM0P-CBWZH-ww',
   // must be HTTP, not HTTPS, for static maps api
-  iconUrlPrefix: 'http://s3-us-west-2.amazonaws.com/travel-time.harrisonliddiard.com/',
+  iconUrlPrefix: 'http://s3-us-west-2.amazonaws.com/driving-time-map.harrisonliddiard.com/sprites/',
   rings: {
     quantity: 8,
     radiusFunc: ringNum => (2400 * ringNum) + 2400,
