@@ -144,7 +144,7 @@ class App extends Component {
     let map;
     if (this.state.origin.lat) {
       map = (
-        <img className="map base" src={`https://maps.googleapis.com/maps/api/staticmap?center=${this.state.origin.lat},${this.state.origin.lng}&zoom=11&scale=2&size=640x640&maptype=roadmap&markers=${this.state.origin.lat},${this.state.origin.lng}`} alt="map" />
+        <img className="map base" src={`https://maps.googleapis.com/maps/api/staticmap?center=${this.state.origin.lat},${this.state.origin.lng}&zoom=11&scale=2&size=640x640&maptype=roadmap&markers=${this.state.origin.lat},${this.state.origin.lng}&key=${this.props.apiKey}`} alt="map" />
       );
     }
     let overlay, legend;
@@ -171,7 +171,7 @@ class App extends Component {
       .join('');
       const overlayStyles = '&style=visibility:off';
       overlay = (
-        <img className="map overlay" onLoad={this.handleLoad} src={`https://maps.googleapis.com/maps/api/staticmap?center=${this.state.origin.lat},${this.state.origin.lng}${overlayStyles}&zoom=9&scale=2&size=640x640&maptype=roadmap${paths}`} alt="map" />
+        <img className="map overlay" onLoad={this.handleLoad} src={`https://maps.googleapis.com/maps/api/staticmap?center=${this.state.origin.lat},${this.state.origin.lng}${overlayStyles}&zoom=9&scale=2&size=640x640&maptype=roadmap${paths}&key=${this.props.apiKey}`} alt="map" />
       );
       legend = (
         <legend>
