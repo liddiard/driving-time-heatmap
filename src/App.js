@@ -10,7 +10,9 @@ class App extends Component {
     super(props);
     this.state = {
       apiLoaded: false,
-      apiKey: 'AIzaSyDCJf2aFDE5ylZIQueCfVk7G_AuPgbRQ74',
+      loading: false,
+      place: null,
+      apiKey: 'AIzaSyC4GIdBEWo_T_5-54ZqYWKM0P-CBWZH-ww',
       origin: {
         lat: null,
         lng: null
@@ -19,6 +21,8 @@ class App extends Component {
       timeType: 'now', // valid values: 'arrival_time', 'departure_time', 'now'
       datetime: ''
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleLoad = this.handleLoad.bind(this);
     this.handlePlaceSelected = this.handlePlaceSelected.bind(this);
     this.handleDatetimeChange = this.handleDatetimeChange.bind(this);
     this.handleTimeTypeChange = this.handleTimeTypeChange.bind(this);
@@ -36,8 +40,21 @@ class App extends Component {
       origin: {
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng()
-      }
-    }, this.getTravelTimes);
+      },
+      points: []
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    if (!this.state.origin.lat) {
+      return;
+    }
+    this.setState({ loading: true }, this.getTravelTimes);
+  }
+
+  handleLoad(event) {
+    this.setState({ loading: false });
   }
 
   handleTimeTypeChange(event) {
@@ -78,7 +95,9 @@ class App extends Component {
     })
     .then(res => {
       if (!res.body.rows.length || !res.body.rows[0].elements) {
-        throw new Error('Malformed API response:', res.body);
+        console.error(res.body);
+        
+        throw new Error('Malformed API response.');
       }
       const durations = res.body.rows[0].elements;
       const newAcc = durations
@@ -108,58 +127,103 @@ class App extends Component {
   }
 
   render() {
-    let overlay, map;
+    let map;
     if (this.state.origin.lat) {
+      map = (
+        <img className="map base" src={`https://maps.googleapis.com/maps/api/staticmap?center=${this.state.origin.lat},${this.state.origin.lng}&zoom=11&scale=2&size=640x640&maptype=roadmap&markers=${this.state.origin.lat},${this.state.origin.lng}`} alt="map" />
+      );
+    }
+    let overlay;
+    if (this.state.points.length && 
+        this.state.points[0].hasOwnProperty('duration')) {
       const paths = Object.keys(this.props.durations)
-      .reverse()
       .map(Number)
-      .map(duration =>
+      .map((duration, i) =>
         `&markers=scale:3|icon:http://s3-us-west-2.amazonaws.com/travel-time.harrisonliddiard.com/${this.props.durations[duration]}.png|` + this.state.points
-        .filter(p => (p.duration / 60) <= duration && (p.duration / 60) > duration - 5)
+        .filter(p => {
+          const minutesTo = p.duration / 60;
+          if (i === 0) {
+            return minutesTo <= duration;
+          }
+          else if (i === Object.keys(this.props.durations).length - 1) {
+            return minutesTo > duration;
+          }
+          else {
+            return minutesTo <= duration && minutesTo > duration - 5
+          }
+        })
         .map(p => [p.lat.toFixed(4), p.lon.toFixed(4)].join(','))
         .join('|')
       )
       .join('');
       const overlayStyles = '&style=visibility:off';
       overlay = (
-        <img className="map overlay" src={`https://maps.googleapis.com/maps/api/staticmap?center=${this.state.origin.lat},${this.state.origin.lng}${overlayStyles}&zoom=9&scale=2&size=640x640&maptype=roadmap${paths}`} alt="map" />
+        <img className="map overlay" onLoad={this.handleLoad} src={`https://maps.googleapis.com/maps/api/staticmap?center=${this.state.origin.lat},${this.state.origin.lng}${overlayStyles}&zoom=9&scale=2&size=640x640&maptype=roadmap${paths}`} alt="map" />
       );
-      map = (
-        <img className="map base" src={`https://maps.googleapis.com/maps/api/staticmap?center=${this.state.origin.lat},${this.state.origin.lng}&zoom=11&scale=2&size=640x640&maptype=roadmap`} alt="map" />
-      );
+    }
+    let submitText;
+    if (this.state.loading) {
+      submitText = <span>
+        Generating Map… <span className="loading">{this.state.loading ? '↻' : ''}</span>
+      </span>;
+    }
+    else {
+      submitText = <span>Generate Map</span>;
     }
     return (
       <div className="App">
-        <h1>Hello world</h1>
-        { this.state.apiLoaded ? 
-          <Autocomplete
-            style={{width: '100%'}}
-            types={['address']}
-            onPlaceSelected={this.handlePlaceSelected}
-          /> : ''
-        }
-        <div className="time-type">
-          <label>
-            <input type="radio" value="now" onChange={this.handleTimeTypeChange}
-                  checked={this.state.timeType === 'now'} />
-            Now
-          </label>
-          <label>
-          <label>
-            <input type="radio" value="departure_time" onChange={this.handleTimeTypeChange}
-                  checked={this.state.timeType === 'departure_time'} />
-            Depart at
-          </label>
-            <input type="radio" value="arrival_time" onChange={this.handleTimeTypeChange}
-                  checked={this.state.timeType === 'arrival_time'} />
-            Arrive by
-          </label>
-          { this.state.timeType !== 'now' ? 
-            <input id="datetime" type="datetime-local" value={this.state.datetime}
-                  onChange={this.handleDatetimeChange} />
-            : ''
-          }
-        </div>
+        <header>
+          <h1>Harrison’s Fabulous Driving Time Map™ 📍🚗 🗺</h1>
+          <h2>Moving somewhere new? Want to see how much your commute and other car travel will suck, or maybe try to avoid hating every minute in traffic? This map is for you!</h2>
+          <form onSubmit={this.handleSubmit}>
+            { this.state.apiLoaded ? 
+              <Autocomplete
+                style={{
+                  width: '100%',
+                  fontSize: '2em',
+                  padding: '0.2em 0.4em'
+                }}
+                types={['address']}
+                onPlaceSelected={this.handlePlaceSelected}
+                autoFocus
+              /> : ''
+            }
+            <div className="time-type">
+              Time: 
+              <label>
+                <input type="radio" value="now" onChange={this.handleTimeTypeChange}
+                      checked={this.state.timeType === 'now'} />
+                Now
+              </label>
+              <label>
+                <input type="radio" value="departure_time" onChange={this.handleTimeTypeChange}
+                      checked={this.state.timeType === 'departure_time'} />
+                Depart at:
+              </label>
+              <label>
+                <input type="radio" value="arrival_time" onChange={this.handleTimeTypeChange}
+                      checked={this.state.timeType === 'arrival_time'} />
+                Arrive by:
+              </label>
+              <input className="datetime" type="datetime-local"
+                    value={this.state.datetime}
+                    onChange={this.handleDatetimeChange} 
+                    disabled={this.state.timeType === 'now'}
+                    min={(new Date()).toISOString().substr(0, 16)} />
+              { this.state.timeType !== 'now' ? 
+                <span className="tooltip">
+                  Enter a date and time in the future; e.g. next Monday during rush hour.<br/>
+                  Times are in your local time zone.
+                </span>
+                : ''
+              }
+              {/* https://stackoverflow.com/a/26749559 ^ */}
+            </div>
+            <button type="submit" disabled={!this.state.origin.lat || this.state.loading}>
+              {submitText}
+            </button>
+          </form>
+        </header>
         <figure className="map-wrapper">
           {overlay}
           {map}
@@ -176,12 +240,13 @@ App.defaultProps = {
     pointsFunc: ringNum => (3 * ringNum) + 4
   },
   durations: {
-    5: 'green',
-    10: 'yellowgreen',
-    15: 'yellow',
-    20: 'orange',
-    25: 'red',
-    30: 'darkred'
+    // max 5 unique icons per request
+    // https://developers.google.com/maps/documentation/static-maps/intro#CustomIcons
+    10: 'teal',
+    15: 'green',
+    20: 'yellow',
+    25: 'orange',
+    30: 'red'
   }
 };
 
