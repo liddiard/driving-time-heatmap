@@ -292,7 +292,7 @@ class App extends Component {
               <ol>
                 <li>Go to <a href="https://developers.google.com/maps/documentation/distance-matrix/get-api-key#step-1-get-an-api-key-from-the-google-api-console" target="_blank">this page</a> and press “Get a key”.</li>
                 <li>From the “Select or create project” menu, choose “Create a new project”.</li>
-                <li>Name the project “Travel time map”.</li>
+                <li>Name the project “Driving time map”.</li>
                 <li>Press “Create and enable API”.</li>
                 <li>Under “Your API key”, copy the string of letters and numbers and paste it below:</li>
               </ol>
