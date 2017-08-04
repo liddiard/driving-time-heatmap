@@ -197,7 +197,7 @@ class App extends Component {
     let submitText;
     if (this.state.loading) {
       submitText = <span>
-        Generating Your Map… <span className="loading">{this.state.loading ? '↻' : ''}</span>
+        Generating Your Map…
       </span>;
     }
     else {
@@ -215,8 +215,8 @@ class App extends Component {
             <p>From Downtown LA during rush hour</p>
           </li>
           <li>
-            <img src="/examples/bay_area_late_morning_weekday.png" />
-            <p>From a hotel next to San Jose Airport on a late morning weekday</p>
+            <img src="/examples/bellevue_weekday_early_afternoon.png" />
+            <p>From Bellevue during an early afternoon weekday</p>
           </li>
           <li>
             <img src="/examples/houston_suburb_fri_morning.png" />
@@ -235,7 +235,7 @@ class App extends Component {
           <h1>Harrison’s Fabulous Driving Time Map™ 🚗 ⏱ 🗺</h1>
           <h2>Create a heatmap for how long it will take you to drive from a starting point – like your apartment or a prospective home – to surrounding areas in various traffic conditions.</h2>
           <form onSubmit={this.handleSubmit}>
-            <h3>1. Enter a start address</h3>
+            <h3>1. Enter a start address 📍</h3>
             { this.state.apiLoaded ? 
               <Autocomplete
                 style={{
@@ -250,7 +250,7 @@ class App extends Component {
                 autoFocus
               /> : ''
             }
-            <h3>2. Choose a date and time for traffic conditions</h3>
+            <h3>2. Choose a date and time for traffic conditions 🚦</h3>
             <div className="time-type">
               <label>
                 <input type="radio" value="now" onChange={this.handleTimeTypeChange}
@@ -277,14 +277,14 @@ class App extends Component {
               {/* https://stackoverflow.com/a/26749559 ^ */}
               { this.state.timeType !== 'now' ? 
                 <div className="tooltip">
-                  Select a date and time in the future; e.g. next Monday during rush hour.<br/>
-                  Times are in your computer’s current time zone.
+                  Select a date and time in the future.<br/>
+                  Times are based on your computer’s current time zone.
                 </div>
                 : ''
               }
             </div>
             <div className="api-key">
-              <h3>3. Get and paste your map key</h3>
+              <h3>3. Get and paste your Google Maps key 🔑</h3>
               <a href="#why-api-key" className="why">
                 Why do I need to do this?
               </a>
@@ -296,7 +296,7 @@ class App extends Component {
                 <li>From the “Select or create project” menu, choose “Create a new project”.</li>
                 <li>Name the project “Driving time map”.</li>
                 <li>Press “Create and enable API”.</li>
-                <li>Under “Your API key”, copy the string of letters and numbers and paste it below:</li>
+                <li>From “Your API key”, copy the string of letters and numbers and paste it below:</li>
               </ol>
               <input type="text" value={this.state.apiKey} 
                      onChange={this.handleApiKeyChange} 
@@ -309,7 +309,7 @@ class App extends Component {
             </button>
             { this.state.loading ? 
               <p className="loading-info">
-                ⏳ Hang tight! This usually takes 10-15 seconds.
+                Map generation usually takes 10-15 seconds. Hang tight! <span className="loading">⏳</span>
               </p> : ''
             }
           </form>

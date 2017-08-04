@@ -23,7 +23,7 @@ html {
 
 a {
   text-decoration: none;
-  color: #55f;
+  color: #57f;
 }
 
 a:hover {
@@ -32,6 +32,12 @@ a:hover {
 
 button {
   cursor: pointer;
+}
+
+button[disabled] {
+  color: initial;
+  opacity: 0.25;
+  cursor: default;
 }
 
 header {
@@ -193,6 +199,7 @@ button[type=submit] {
   display: inline-block;
   z-index: -1;
   margin: 0;
+  overflow: hidden;
 }
 
 .map {
@@ -223,5 +230,4 @@ button[type=submit] {
 
 .loading-info {
   font-size: 0.9em;
-  color: rgba(255,255,255, 0.6);
 }
