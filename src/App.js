@@ -289,7 +289,7 @@ class App extends Component {
                 Why do I need to do this?
               </a>
               <p id="why-api-key">
-                Generating this map requires a Google Maps service that only allows a limited number of daily uses per person. Because of this, you need to get and use your own (free!) key. The key will allow you to generate about 20 driving time maps per day.
+                Generating this map requires a Google Maps service that permits a limited number of daily uses per person. Because of this, you need to get and use your own (free!) key. Your key will allow you to generate about 20 driving time maps per day.
               </p>
               <ol>
                 <li>Go to <a href="https://developers.google.com/maps/documentation/distance-matrix/get-api-key#step-1-get-an-api-key-from-the-google-api-console" target="_blank">this page</a> and press “Get a key”.</li>
