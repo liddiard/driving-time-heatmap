@@ -23,11 +23,15 @@ html {
 
 a {
   text-decoration: none;
-  color: #00c;
+  color: #55f;
 }
 
 a:hover {
   text-decoration: underline;
+}
+
+button {
+  cursor: pointer;
 }
 
 header {
@@ -46,7 +50,7 @@ header h2 {
 
 legend {
   margin: 1em auto;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(255,255,255,0.2);
   padding: 0.25em 0.75em;
 }
 
@@ -70,19 +74,26 @@ legend li img {
   height: 2em;
 }
 
+footer {
+  margin: 2em auto 0;
+  padding-top: 1em;
+  border-top: 1px solid rgba(255,255,255,0.1); 
+  font-size: 0.8em;
+}
+
 ul.examples {
   list-style-type: none;
   padding: 0;
   margin: 0;
   line-height: 1.2;
-  color: gray;
+  color: rgba(255,255,255, 0.6);
   font-size: 0.8em;
   white-space: nowrap;
   text-align: center;
   margin-left: -110px;
   overflow-x: auto;
   padding-bottom: 1em;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 ul.examples li {
@@ -110,11 +121,12 @@ ul.examples p {
 }
 
 .time-type label {
-  margin: 0 0.25em;
+  margin: 0 0.4em;
 }
 
 .time-type input {
   vertical-align: text-top;
+  margin-right: 0.5em;
 }
 
 input.datetime {
@@ -204,5 +216,5 @@ button[type=submit] {
 
 .loading-info {
   font-size: 0.9em;
-  color: gray;
+  color: rgba(255,255,255, 0.6);
 }

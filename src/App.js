@@ -228,12 +228,12 @@ class App extends Component {
           </li>
           <li>
             <img src="/examples/melborne_suburbs_saturday_morning.png" />
-            <p>From the suburbs of Melbourne on a Saturday morning</p>
+            <p>From the suburbs of Melbourne on Saturday morning</p>
           </li>
         </ul>
         <header>
           <h1>Harrison’s Fabulous Driving Time Map™ 🚗 ⏱ 🗺</h1>
-          <h2>See how long it will take you to drive from a starting point – like your apartment or a prospective home – to surrounding areas in various traffic conditions.</h2>
+          <h2>Create a heatmap for how long it will take you to drive from a starting point – like your apartment or a prospective home – to surrounding areas in various traffic conditions.</h2>
           <form onSubmit={this.handleSubmit}>
             <h3>1. Enter a start address</h3>
             { this.state.apiLoaded ? 
@@ -287,7 +287,7 @@ class App extends Component {
                 Why do I need to do this?
               </a>
               <p id="why-api-key">
-                Generating the driving time map uses a Google Maps service that only allows a limited number of daily uses per person. Because of this, you need to get and use your own (free!) key. The key will allow you to generate about 20 driving time maps per day.
+                Generating this map uses a Google Maps service that only allows a limited number of daily uses per person. Because of this, you need to get and use your own (free!) key. The key will allow you to generate about 20 driving time maps per day.
               </p>
               <ol>
                 <li>Go to <a href="https://developers.google.com/maps/documentation/distance-matrix/get-api-key#step-1-get-an-api-key-from-the-google-api-console" target="_blank">this page</a> and press “Get a key”.</li>
@@ -317,6 +317,9 @@ class App extends Component {
           {overlay}
           {map}
         </figure>
+        <footer>
+          Created by <a href="https://harrisonliddiard.com" target="_blank">Harrison Liddiard</a>. Source <a href="https://github.com/liddiard/travel-time-map" target="_blank">on GitHub</a>.
+        </footer>
       </div>
     );
   }
