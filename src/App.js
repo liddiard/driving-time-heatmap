@@ -175,7 +175,7 @@ class App extends Component {
       );
       legend = (
         <legend>
-          <h3>Minutes from starting point</h3>
+          <h3>Minutes from starting point:</h3>
           <ul>
             { Object.keys(this.props.durations)
               .map((d, i) => {
