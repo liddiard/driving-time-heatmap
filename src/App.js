@@ -4,6 +4,8 @@ import Autocomplete from 'react-google-autocomplete';
 import Flatpickr from 'react-flatpickr'
 import Geodesy from 'geodesy';
 
+import Examples from './components/Examples';
+import Heatmap from './components/Heatmap';
 import './App.css';
 
 class App extends Component {
@@ -73,11 +75,6 @@ class App extends Component {
     this.setState({ datetime: value });
   }
 
-  displayOverlay() {
-    return this.state.points.length && 
-           this.state.points[0].hasOwnProperty('duration');
-  }
-
   directionsFromNumPoints(numPoints) {
     const directions = [];
     for (let i = 0; i < numPoints; ++i) {
@@ -141,61 +138,6 @@ class App extends Component {
   }
 
   render() {
-    let map;
-    if (this.state.origin.lat) {
-      map = (
-        <img className="map base" src={`https://maps.googleapis.com/maps/api/staticmap?center=${this.state.origin.lat},${this.state.origin.lng}&zoom=11&scale=2&size=640x640&maptype=roadmap&markers=${this.state.origin.lat},${this.state.origin.lng}&key=${this.props.apiKey}`} alt="map" />
-      );
-    }
-    let overlay, legend, saveImage;
-    if (this.displayOverlay()) {
-      const paths = Object.keys(this.props.durations)
-      .map(Number)
-      .map((duration, i) =>
-        `&markers=scale:3|icon:${this.props.iconUrlPrefix}${this.props.durations[duration]}.png|` + this.state.points
-        .filter(p => {
-          const minutesTo = p.duration / 60;
-          if (i === 0) {
-            return minutesTo <= duration;
-          }
-          else if (i === Object.keys(this.props.durations).length - 1) {
-            return minutesTo > duration;
-          }
-          else {
-            return minutesTo <= duration && minutesTo > duration - 5
-          }
-        })
-        .map(p => [p.lat.toFixed(4), p.lon.toFixed(4)].join(','))
-        .join('|')
-      )
-      .join('');
-      const overlayStyles = '&style=visibility:off';
-      overlay = (
-        <img className="map overlay" onLoad={this.handleLoad} src={`https://maps.googleapis.com/maps/api/staticmap?center=${this.state.origin.lat},${this.state.origin.lng}${overlayStyles}&zoom=9&scale=2&size=640x640&maptype=roadmap${paths}&key=${this.props.apiKey}`} alt="map" />
-      );
-      legend = (
-        <legend>
-          <h3>Minutes from origin point:</h3>
-          <ul>
-            { Object.keys(this.props.durations)
-              .map((d, i) => {
-                const color = this.props.durations[d];
-                let range;
-                if (i === 0)
-                  range = `0–${d}`;
-                else if (i === Object.keys(this.props.durations).length - 1)
-                  range = `${d-5}+`;
-                else
-                  range = `${d-5}–${d}`;
-                return <li key={d}>
-                  <img src={`${this.props.iconUrlPrefix}${color}.png`} alt={color} /> {range}
-                </li>
-              }) 
-            }
-          </ul>
-        </legend>
-      );
-    }
     let submitText;
     if (this.state.loading) {
       submitText = <span>
@@ -205,34 +147,16 @@ class App extends Component {
     else {
       submitText = <span>4. Generate Your Map!</span>;
     }
+    let map;
+    if (this.state.origin.lat) {
+      map = <Heatmap durations={this.props.durations} 
+                     iconUrlPrefix={this.props.iconUrlPrefix} 
+                     points={this.state.points} origin={this.state.origin} 
+                     apiKey={this.props.apiKey} handleLoad={this.handleLoad} />
+    }
     return (
       <div className="App">
-        <ul className="examples">
-          <li>
-            <img src="/examples/la_early_morning_weekend.png" />
-            <p>From Downtown LA on an early morning weekend</p>
-          </li>
-          <li>
-            <img src="/examples/la_rush_hour.png" />
-            <p>From Downtown LA during rush hour</p>
-          </li>
-          <li>
-            <img src="/examples/bellevue_weekday_early_afternoon.png" />
-            <p>From Bellevue during an early afternoon weekday</p>
-          </li>
-          <li>
-            <img src="/examples/houston_suburb_fri_morning.png" />
-            <p>From a Houston suburb on Friday morning</p>
-          </li>
-          <li>
-            <img src="/examples/munich_stadium_late_evening.png" />
-            <p>From the Olympic stadium in Munich on a late evening weekday</p>
-          </li>
-          <li>
-            <img src="/examples/melborne_suburbs_saturday_morning.png" />
-            <p>From the suburbs of Melbourne on Saturday morning</p>
-          </li>
-        </ul>
+        <Examples />
         <header>
           <h1>Driving Time Heatmap 🚗 ⏱ 🔥 🗺</h1>
           <h2>Create a color map that shows how long it will take to drive from an origin point – like your apartment or a prospective home – to surrounding areas in different traffic conditions.</h2>
@@ -316,11 +240,9 @@ class App extends Component {
             }
           </form>
         </header>
-        {legend}
-        <figure className="map-wrapper">
-          {overlay}
+        <main>
           {map}
-        </figure>
+        </main>
         <footer>
           Created by <a href="https://harrisonliddiard.com" target="_blank">Harrison Liddiard</a>. Source <a href="https://github.com/liddiard/travel-time-map" target="_blank">on GitHub</a>.
         </footer>
