@@ -32,10 +32,23 @@ a:hover {
 
 button {
   cursor: pointer;
+  background-color: #57f;
+  color: white;
+  border: 0;
+  padding: 0.25em 0.5em;
+  border-radius: 1em;
+}
+
+button:hover {
+  background-color: #46e;
+}
+
+button:active {
+  background-color: #35d;
 }
 
 button[disabled] {
-  color: initial;
+  color: white;
   opacity: 0.25;
   cursor: default;
 }

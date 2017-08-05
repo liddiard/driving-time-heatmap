@@ -1,5 +1,5 @@
 {
-  "name": "travel-time-map",
+  "name": "driving-time-heatmap",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

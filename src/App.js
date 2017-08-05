@@ -147,7 +147,7 @@ class App extends Component {
         <img className="map base" src={`https://maps.googleapis.com/maps/api/staticmap?center=${this.state.origin.lat},${this.state.origin.lng}&zoom=11&scale=2&size=640x640&maptype=roadmap&markers=${this.state.origin.lat},${this.state.origin.lng}&key=${this.props.apiKey}`} alt="map" />
       );
     }
-    let overlay, legend;
+    let overlay, legend, saveImage;
     if (this.displayOverlay()) {
       const paths = Object.keys(this.props.durations)
       .map(Number)
@@ -175,7 +175,7 @@ class App extends Component {
       );
       legend = (
         <legend>
-          <h3>Minutes from starting point:</h3>
+          <h3>Minutes from origin point:</h3>
           <ul>
             { Object.keys(this.props.durations)
               .map((d, i) => {
@@ -234,10 +234,10 @@ class App extends Component {
           </li>
         </ul>
         <header>
-          <h1>Harrison’s Fabulous Driving Time Map™ 🚗 ⏱ 🗺</h1>
-          <h2>Create a heatmap that shows how long it will take to drive from a starting point – like your apartment or a prospective home – to surrounding areas in various traffic conditions.</h2>
+          <h1>Driving Time Heatmap 🚗 ⏱ 🔥 🗺</h1>
+          <h2>Create a color map that shows how long it will take to drive from an origin point – like your apartment or a prospective home – to surrounding areas in different traffic conditions.</h2>
           <form onSubmit={this.handleSubmit}>
-            <h3>1. Enter a start address 📍</h3>
+            <h3>1. Enter an origin address 📍</h3>
             { this.state.apiLoaded ? 
               <Autocomplete
                 style={{
@@ -288,7 +288,7 @@ class App extends Component {
             <div className="api-key">
               <h3>3. Get and paste your Google Maps key 🔑</h3>
               <a href="#why-api-key" className="why">
-                Why do I need to do this?
+                Why do I need to do this? ▾
               </a>
               <p id="why-api-key">
                 Generating this map requires a Google Maps service that permits a limited number of daily uses per person. Because of this, you need to get and use your own (free!) key. Your key will allow you to generate about 20 driving time maps per day.
