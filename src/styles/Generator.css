@@ -7,52 +7,6 @@
   }
 }
 
-
-html {
-  box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-.App {
-  text-align: center;
-  padding: 1em;
-  line-height: 1.4;
-}
-
-a {
-  text-decoration: none;
-  color: #57f;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-button {
-  cursor: pointer;
-  background-color: #57f;
-  color: white;
-  border: 0;
-  padding: 0.25em 0.5em;
-  border-radius: 1em;
-}
-
-button:not([disabled]):hover {
-  background-color: #46e;
-}
-
-button:not([disabled]):active {
-  background-color: #35d;
-}
-
-button[disabled] {
-  color: white;
-  opacity: 0.25;
-  cursor: default;
-}
-
 header {
   margin: 0 auto 2em;
   max-width: 960px;

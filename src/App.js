@@ -13,7 +13,7 @@ export default function App(props) {
     <Router>
       <div>
         <Route exact path="/" component={Generator} />
-        <Route path="/timelapse" component={Timelapse} />
+        <Route path="/timelapse/:location/:day" component={Timelapse} />
       </div>
     </Router>
   );
