@@ -57,7 +57,7 @@ export default class Timelapse extends Component {
       );
     }
     return (
-      <div className="App">
+      <div className="Timelapse App">
         <header>
           Driving times from
           <h1>{this.slugToTitle(this.props.match.params.location)}</h1>

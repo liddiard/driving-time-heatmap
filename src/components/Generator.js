@@ -156,7 +156,7 @@ export default class Generator extends Component {
                      apiKey={this.props.apiKey} handleLoad={this.handleLoad} />
     }
     return (
-      <div className="App">
+      <div className="Generator App">
         <Examples />
         <header>
           <h1>Driving Time Heatmap 🚗 ⏱ 🔥 🗺</h1>

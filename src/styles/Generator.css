@@ -7,22 +7,22 @@
   }
 }
 
-header {
+.Generator header {
   margin: 0 auto 2em;
   max-width: 960px;
 }
 
-form h3 {
+.Generator form h3 {
   margin: 1.5em 0 0.5em;
   font-size: 1.4em;
 }
 
-header h2 {
+.Generator header h2 {
   font-weight: normal;
   font-size: 1.4em;
 }
 
-footer {
+.Generator footer {
   margin: 2em auto 0;
   padding-top: 1em;
   border-top: 1px solid rgba(255,255,255,0.1); 

@@ -2,17 +2,18 @@ input[type=range] {
   width: 100%;
 }
 
-h1, h2 {
+.Timelapse h1, 
+.Timelapse h2 {
   text-transform: capitalize;
   margin: 0;
 }
 
-header {
+.Timelapse header {
   width: 100%;
   margin: 1em auto 2em;
 }
 
-time {
+.Timelapse time {
   font-size: 4em;
   font-weight: bold;
   font-family: monospace;
@@ -39,6 +40,6 @@ figure.maps img:first-child {
   transform: initial;
 }
 
-legend {
+.Timelapse legend {
   font-size: 0.9em;
 }
