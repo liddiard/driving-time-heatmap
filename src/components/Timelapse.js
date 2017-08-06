@@ -76,7 +76,7 @@ export default class Timelapse extends Component {
                onChange={this.handleTimeChange}
                autoFocus />
         <time>{this.formatTime(this.state.minsFromMidnight)}</time>
-        <p>Generated using <Link to="/">Driving Time Heatmap 🚗 ⏱ 🔥 🗺</Link></p>
+        <p>Created using <Link to="/">Driving Time Heatmap 🚗 ⏱ 🔥 🗺</Link></p>
       </div>
     );
   }
