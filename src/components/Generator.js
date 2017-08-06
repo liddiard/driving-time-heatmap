@@ -4,6 +4,7 @@ import Autocomplete from 'react-google-autocomplete';
 import Flatpickr from 'react-flatpickr'
 import Geodesy from 'geodesy';
 
+import config from '../config.json';
 import Examples from './Examples';
 import Heatmap from './Heatmap';
 import '../styles/Generator.css';
@@ -251,22 +252,12 @@ export default class Generator extends Component {
   }
 }
 
-Generator.defaultProps = {
+Generator.defaultProps = Object.assign({
   apiKey: 'AIzaSyC4GIdBEWo_T_5-54ZqYWKM0P-CBWZH-ww',
   // must be HTTP, not HTTPS, for static maps api
-  iconUrlPrefix: 'http://s3-us-west-2.amazonaws.com/driving-time-map.harrisonliddiard.com/sprites/',
   rings: {
     quantity: 8,
     radiusFunc: ringNum => (2400 * ringNum) + 2400,
     pointsFunc: ringNum => (3 * ringNum) + 4
-  },
-  durations: {
-    // max 5 unique icons per request
-    // https://developers.google.com/maps/documentation/static-maps/intro#CustomIcons
-    10: 'teal',
-    15: 'green',
-    20: 'yellow',
-    25: 'orange',
-    30: 'red'
   }
-};
+}, config);

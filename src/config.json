@@ -1,0 +1,10 @@
+{
+  "iconUrlPrefix": "http://s3-us-west-2.amazonaws.com/driving-time-map.harrisonliddiard.com/sprites/",
+  "durations": {
+    "10": "teal",
+    "15": "green",
+    "20": "yellow",
+    "25": "orange",
+    "30": "red"
+  }
+}

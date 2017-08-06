@@ -4,4 +4,41 @@ input[type=range] {
 
 h1, h2 {
   text-transform: capitalize;
+  margin: 0;
+}
+
+header {
+  width: 100%;
+  margin: 1em auto 2em;
+}
+
+time {
+  font-size: 4em;
+  font-weight: bold;
+  font-family: monospace;
+}
+
+figure.maps {
+  margin: 1em 0;
+  position: relative;
+}
+
+figure.maps img {
+  position: absolute;
+  max-width: 90vw;
+  max-height: 90vh;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+figure.maps img:first-child {
+  position: relative;
+  top: initial;
+  left: initial;
+  transform: initial;
+}
+
+legend {
+  font-size: 0.9em;
 }
