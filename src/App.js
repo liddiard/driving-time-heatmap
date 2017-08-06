@@ -6,11 +6,15 @@ import {
 } from 'react-router-dom';
 
 import Generator from './components/Generator';
+import Timelapse from './components/Timelapse';
 
 export default function App(props) { 
   return (
     <Router>
-      <Route exact path="/" component={Generator}/>
+      <div>
+        <Route exact path="/" component={Generator} />
+        <Route path="/timelapse" component={Timelapse} />
+      </div>
     </Router>
   );
 }
