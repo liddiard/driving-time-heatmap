@@ -1,0 +1,25 @@
+legend {
+  margin: 1em auto;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 0.25em 0.75em;
+}
+
+legend h3 {
+  margin: 0.5em 0;
+}
+
+legend ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0.5em 0;
+}
+
+legend li {
+  display: inline-block;
+  margin: 0 0.5em;
+}
+
+legend li img {
+  vertical-align: middle;
+  height: 2em;
+}

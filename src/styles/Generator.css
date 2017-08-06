@@ -68,72 +68,11 @@ header h2 {
   font-size: 1.4em;
 }
 
-legend {
-  margin: 1em auto;
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 0.25em 0.75em;
-}
-
-legend h3 {
-  margin: 0.5em 0;
-}
-
-legend ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0.5em 0;
-}
-
-legend li {
-  display: inline-block;
-  margin: 0 0.5em;
-}
-
-legend li img {
-  vertical-align: middle;
-  height: 2em;
-}
-
 footer {
   margin: 2em auto 0;
   padding-top: 1em;
   border-top: 1px solid rgba(255,255,255,0.1); 
   font-size: 0.8em;
-}
-
-ul.examples {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  line-height: 1.2;
-  color: rgba(255,255,255, 0.6);
-  font-size: 0.8em;
-  white-space: nowrap;
-  text-align: center;
-  margin-left: -110px;
-  overflow-x: auto;
-  padding-bottom: 1em;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-ul.examples li {
-  display: inline-block;
-  width: 200px;
-  white-space: normal;
-  vertical-align: top;
-}
-
-ul.examples img {
-  display: block;
-  margin: 0 auto;
-  width: 322.5px;
-}
-
-ul.examples p {
-  margin: 0.5em 0;
-  text-align: right;
-  width: 75%;
-  float: right;
 }
 
 .tooltip {
@@ -206,35 +145,6 @@ button[type=submit] {
   max-width: 420px;
   font-family: monospace;
   padding: 0.25em 0.5em;
-}
-
-.map-wrapper {
-  position: relative;
-  display: inline-block;
-  z-index: -1;
-  margin: 0;
-  overflow: hidden;
-}
-
-.map {
-  border-radius: 50%;
-  display: block;
-  margin: 0 auto;
-  max-width: 95vw;
-  max-height: 95vh;
-}
-
-.base {
-  border: 5px solid black;
-}
-
-.overlay {
-  position: absolute;
-  transform: scale(3.5);
-  mix-blend-mode: multiply;
-  opacity: 0.8;
-  transform-origin: 50% 43%;
-  clip-path: circle(14.2% at 50.1% 45%);
 }
 
 .loading {

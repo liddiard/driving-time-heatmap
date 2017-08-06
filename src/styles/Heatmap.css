@@ -1,0 +1,28 @@
+.map-wrapper {
+  position: relative;
+  display: inline-block;
+  z-index: -1;
+  margin: 0;
+  overflow: hidden;
+}
+
+.map {
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+  max-width: 95vw;
+  max-height: 95vh;
+}
+
+.base {
+  border: 5px solid black;
+}
+
+.overlay {
+  position: absolute;
+  transform: scale(3.5);
+  mix-blend-mode: multiply;
+  opacity: 0.8;
+  transform-origin: 50% 43%;
+  clip-path: circle(14.2% at 50.1% 45%);
+}

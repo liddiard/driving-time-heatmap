@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import '../styles/Examples.css';
+
 export default function Examples(props) {
   return (
     <ul className="examples">

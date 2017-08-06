@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import '../styles/Legend.css';
+
 export default function Legend(props) {
   return (
     <legend>
