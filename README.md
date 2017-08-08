@@ -1,4 +1,4 @@
-# travel-time-map
+# driving-time-heatmap
 
 ## Screenshots
 
