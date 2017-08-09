@@ -24,6 +24,13 @@ figure.maps {
   position: relative;
 }
 
+figure.maps progress {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 figure.maps img {
   position: absolute;
   max-width: 90vw;

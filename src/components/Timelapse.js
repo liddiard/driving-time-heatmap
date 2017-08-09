@@ -9,13 +9,21 @@ export default class Timelapse extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      minsFromMidnight: this.props.startHour * 60
+      minsFromMidnight: this.props.startHour * 60,
+      mapsLoaded: 0 // number of maps loaded
     };
     this.handleTimeChange = this.handleTimeChange.bind(this);
+    this.handleMapLoad = this.handleMapLoad.bind(this);
   }
 
   handleTimeChange(event) {
     this.setState({ minsFromMidnight: parseInt(event.target.value) });
+  }
+
+  handleMapLoad() {
+    this.setState((prevState, props) => ({
+      mapsLoaded: prevState.mapsLoaded + 1
+    }));
   }
 
   slugToTitle(slug) {
@@ -25,7 +33,7 @@ export default class Timelapse extends Component {
   formatTime(minsFromMidnight) {
     const hour = Math.floor(minsFromMidnight/60);
     const min = Math.round((minsFromMidnight/60 - hour) * 60, 2);
-    return [hour, this.pad(min)].join(':');
+    return [this.pad(hour), this.pad(min)].join(':');
   }
 
   pad(num) { 
@@ -52,10 +60,12 @@ export default class Timelapse extends Component {
                   this.props.match.params.day, 
                   `${time}.png`].join('/')}
                   style={{opacity: opacity}}
+                  onLoad={this.handleMapLoad}
                   alt={time}
                   key={time} />
       );
     }
+    const progress = <progress></progress>
     return (
       <div className="Timelapse App">
         <header>
@@ -68,6 +78,11 @@ export default class Timelapse extends Component {
                 iconUrlPrefix={this.props.iconUrlPrefix} />
         <figure className="maps">
           {maps}
+          { this.state.mapsLoaded < this.props.numMaps ? 
+            <progress min="0" max={this.props.numMaps} 
+                      value={this.state.mapsLoaded}></progress> 
+            : '' 
+          }
         </figure>
         <input type="range" 
                min={this.props.startHour*60} 
@@ -82,8 +97,11 @@ export default class Timelapse extends Component {
   }
 }
 
+const startHour = 6;
+const endHour = 22;
 Timelapse.defaultProps = Object.assign({
-  startHour: 6,
-  endHour: 22,
-  baseUrl: '/timelapse'
+  startHour: startHour,
+  endHour: endHour,
+  baseUrl: '/timelapse',
+  numMaps: (endHour - startHour) * 2
 }, config);
