@@ -7,7 +7,8 @@
   }
 }
 
-.Generator header {
+.Generator header,
+.Generator .how-it-works {
   margin: 0 auto 2em;
   max-width: 960px;
 }
@@ -27,6 +28,10 @@
   padding-top: 1em;
   border-top: 1px solid rgba(255,255,255,0.1); 
   font-size: 0.8em;
+}
+
+.Generator .how-it-works p {
+  text-align: left;
 }
 
 .tooltip {
