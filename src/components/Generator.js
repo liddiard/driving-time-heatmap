@@ -199,6 +199,7 @@ export default class Generator extends Component {
                          placeholder="Select date and time"
                          onChange={this.handleDatetimeChange}
                          options={{
+                           // disable past dates
                            disable: [{ from: "1900-01-01", to: (new Date()).toISOString().substr(0, 10) }],
                          }} />
               {/* https://stackoverflow.com/a/26749559 ^ */}
