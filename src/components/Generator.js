@@ -246,7 +246,7 @@ export default class Generator extends Component {
         </main>
         <section className="how-it-works">
           <h3>How it works</h3>
-          <p>Driving Time Heatmap creates an array of points surrounding your origin address in concentric circles. It then queries the <a href="https://developers.google.com/maps/documentation/distance-matrix/" target="_blank">Google Maps Distance Matrix API</a> with your origin point and these surrounding points for driving time estimates at your selected time. It uses the <a href="https://developers.google.com/maps/documentation/static-maps/" target="_blank">Google Static Maps API</a> to plot these results onto a color-coded map.</p>
+          <p>Driving Time Heatmap creates an array of more than 100 points surrounding your origin address in concentric circles. It queries the <a href="https://developers.google.com/maps/documentation/distance-matrix/" target="_blank">Google Maps Distance Matrix API</a> for driving time estimates from your origin point to these surrounding points at your selected time. It plots these results onto a color-coded map using the <a href="https://developers.google.com/maps/documentation/static-maps/" target="_blank">Google Static Maps API</a>.</p>
         </section>
         <footer>
           Created by <a href="https://harrisonliddiard.com" target="_blank">Harrison Liddiard</a>. Source <a href="https://github.com/liddiard/travel-time-map" target="_blank">on GitHub</a>.
