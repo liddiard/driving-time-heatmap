@@ -43,7 +43,8 @@ export default class Timelapse extends Component {
   render() {
     const maps = [];
     for (let i = this.props.startHour; i <= this.props.endHour; i += 0.5) {
-      const time = i % 1 ? Math.floor(i)+':30' : Math.floor(i)+':00';
+      const time = i % 1 ? this.pad(Math.floor(i))+'.30' : 
+                           this.pad(Math.floor(i))+'.00';
       let opacity;
       if (i*60 <= this.state.minsFromMidnight) {
         opacity = 1;
