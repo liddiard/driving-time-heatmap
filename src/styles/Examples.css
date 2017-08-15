@@ -9,6 +9,7 @@ ul.examples {
   text-align: center;
   margin-left: -110px;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   padding-bottom: 1em;
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
