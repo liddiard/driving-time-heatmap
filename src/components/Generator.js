@@ -113,8 +113,14 @@ export default class Generator extends Component {
       }
       const durations = res.body.rows[0].elements;
       const newAcc = durations
-      .filter(d => d.duration_in_traffic || d.duration)
-      .map(d => d.duration_in_traffic ? d.duration_in_traffic.value : d.duration.value);
+      .map(d => {
+        if (d.duration_in_traffic)
+          return d.duration_in_traffic.value;
+        else if (d.duration)
+          return d.duration.value;
+        else // no route to destination point
+          return Infinity;
+      });
       return this.query(points.slice(quantityPerCall), acc.concat(newAcc));
     });
   }
@@ -236,9 +242,12 @@ export default class Generator extends Component {
               {submitText}
             </button>
             { this.state.loading ? 
-              <p className="loading-info">
-                Map generation usually takes 10-15 seconds. Hang tight! <span className="loading">⏳</span>
-              </p> : ''
+              <div className="loading-info">
+                <p>
+                  Map generation usually takes 10-15 seconds. Hang tight!
+                </p>
+                <progress />
+              </div> : ''
             }
           </form>
         </header>
