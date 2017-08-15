@@ -10,20 +10,50 @@ export default class Timelapse extends Component {
     super(props);
     this.state = {
       minsFromMidnight: this.props.startHour * 60,
-      mapsLoaded: 0 // number of maps loaded
+      mapsLoaded: 0, // number of maps loaded
+      playing: false
     };
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.handleMapLoad = this.handleMapLoad.bind(this);
+    this.handlePlay = this.handlePlay.bind(this);
+    this.handlePause = this.handlePause.bind(this);
   }
 
   handleTimeChange(event) {
-    this.setState({ minsFromMidnight: parseInt(event.target.value) });
+    window.clearInterval(this.interval);
+    this.setState({ 
+      playing: false,
+      minsFromMidnight: parseInt(event.target.value) 
+    });
   }
 
   handleMapLoad() {
-    this.setState((prevState, props) => ({
+    this.setState(prevState => ({
       mapsLoaded: prevState.mapsLoaded + 1
     }));
+  }
+
+  handlePlay() {
+    this.setState({ playing: true }, () => {
+      this.interval = window.setInterval(() => {
+        if (this.state.minsFromMidnight < this.props.endHour * 60) {
+          this.setState(prevState => ({
+            minsFromMidnight: prevState.minsFromMidnight + 1
+          }));
+        }
+        else {
+          this.setState({ playing: false }, () => {
+            window.clearInterval(this.interval);
+          });
+        }
+      }, 50);
+    });
+  }
+
+  handlePause() {
+    this.setState({ playing: false }, () => {
+      window.clearInterval(this.interval);
+    });
   }
 
   slugToTitle(slug) {
@@ -85,14 +115,24 @@ export default class Timelapse extends Component {
             : '' 
           }
         </figure>
+        <time>{this.formatTime(this.state.minsFromMidnight)}</time>
         <input type="range" 
                min={this.props.startHour*60} 
                max={this.props.endHour*60}
                value={this.state.minsFromMidnight}
                onChange={this.handleTimeChange}
                autoFocus />
-        <time>{this.formatTime(this.state.minsFromMidnight)}</time>
-        <p>Created using <Link to="/">Driving Time Heatmap 🚗 ⏱ 🔥 🗺</Link></p>
+        { this.state.playing ? 
+          <button className="pause control" title="pause"
+                  onClick={this.handlePause}>⏸</button>
+
+          : 
+          <button className="play control" title="play" 
+                  onClick={this.handlePlay}>▶️</button>
+        } 
+        <footer>
+          <p>Created using <Link to="/">Driving Time Heatmap 🚗 ⏱ 🔥 🗺</Link></p>
+        </footer>
       </div>
     );
   }
