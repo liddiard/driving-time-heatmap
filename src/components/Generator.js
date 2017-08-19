@@ -243,9 +243,7 @@ export default class Generator extends Component {
             </button>
             { this.state.loading ? 
               <div className="loading-info">
-                <p>
-                  Map generation usually takes 10-15 seconds. Hang tight!
-                </p>
+                Map generation usually takes 10-15 seconds. Hang tight!
                 <progress />
               </div> : ''
             }
