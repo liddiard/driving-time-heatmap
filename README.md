@@ -1,15 +1,15 @@
 # driving-time-heatmap
 
-## Screenshots
+## Examples
 
-### South Bay Area traffic during early afternoon
+From next to San Jose airport on a late morning weekday
 
-![San Jose normal traffic](public/screenshots/sj_normal_traffic.png)
+![San Jose](public/examples/bay_area_late_morning_weekday.png)
 
-- Green/yellow-green: 5-15 mins away
-- Yellow/orange: 15-25 mins away
-- Red/dark red: 25+ mins away
+From Bellevue on an early morning weekday
 
-### South Bay Area traffic during evening rush hour
+![Bellevue](public/examples/bellevue_weekday_early_afternoon.png)
 
-![San Jose rush hour traffic](public/screenshots/sj_rush_traffic.png)
+From the suburbs of Melbourne on a Saturday morning
+
+![Melbourne](public/examples/melborne_suburbs_saturday_morning.png)
