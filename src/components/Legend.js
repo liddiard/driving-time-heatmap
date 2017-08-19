@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 
 import '../styles/Legend.css';
 
+function httpToHttps(url) {
+  return url.replace('http://', 'https://');
+}
+
 export default function Legend(props) {
   return (
     <legend>
@@ -19,7 +23,8 @@ export default function Legend(props) {
             else
               range = `${d-5}–${d}`;
             return <li key={d}>
-              <img src={`${props.iconUrlPrefix}${color}.png`} alt={color} /> {range}
+              <img src={`${httpToHttps(props.iconUrlPrefix)}${color}.png`} 
+                   alt={color} /> {range}
             </li>
           }) 
         }
