@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import request from 'superagent';
 import Autocomplete from 'react-google-autocomplete';
 import Flatpickr from 'react-flatpickr'
-import Geodesy from 'geodesy';
+import LatLon from 'geodesy/latlon-spherical.js';
 
 import config from '../config.json';
 import Examples from './Examples';
@@ -126,8 +126,7 @@ export default class Generator extends Component {
   }
 
   getTravelTimes() {
-    const LatLon = Geodesy.LatLonSpherical;
-    const origin = LatLon(this.state.origin.lat, this.state.origin.lng);
+    const origin = new LatLon(this.state.origin.lat, this.state.origin.lng);
     const ringRadii = new Array(this.props.rings.quantity)
     .fill(null)
     .map((_, index) => this.props.rings.radiusFunc(index));
@@ -176,7 +175,10 @@ export default class Generator extends Component {
                   fontSize: '2em',
                   padding: '0.2em 0.4em'
                 }}
-                types={['address']}
+                apiKey={this.props.apiKey}
+                options={{
+                  types: ['address']
+                }}
                 onPlaceSelected={this.handlePlaceSelected}
                 placeholder="42 Wallaby Way, Sydney, Australia"
                 required
@@ -226,11 +228,12 @@ export default class Generator extends Component {
                 Generating this map requires a Google Maps service that permits a limited number of daily uses per person. Because of this, you need to get and use your own (free!) key. Your key will allow you to generate about 20 driving time maps per day.
               </p>
               <ol>
-                <li>Go to <a href="https://developers.google.com/maps/documentation/distance-matrix/get-api-key#step-1-get-an-api-key-from-the-google-api-console" target="_blank">this page</a> and press “Get a key”.</li>
-                <li>From the “Select or create project” menu, choose “Create a new project”.</li>
-                <li>Name the project “Driving time map”.</li>
-                <li>Press “Create and enable API”.</li>
-                <li>From “Your API key”, copy the string of letters and numbers and paste it below:</li>
+                <li>Go to <a href="https://console.cloud.google.com/project/_/google/maps-apis/credentials" target="_blank">this page</a> and press “Create Project”.</li>
+                <li>Name the project “Driving time map” and press “Create”.</li>
+                <li>Select “Distance Matrix API” and press “Enable”.</li>
+                <li>On the left sidebar, select “Credentials”.</li>
+                <li>Select “Create Credentials" → “API key”.</li>
+                <li>Copy the key to clipboard and paste it below:</li>
               </ol>
               <input type="text" value={this.state.apiKey} 
                      onChange={this.handleApiKeyChange} 

@@ -31,7 +31,7 @@ export default function Heatmap(props) {
           return minutesTo <= duration && minutesTo > duration - 5
         }
       })
-      .map(p => [p.lat.toFixed(4), p.lon.toFixed(4)].join(','))
+      .map(p => [p._lat.toFixed(4), p._lon.toFixed(4)].join(','))
       .join('|')
     )
     .join('');
